@@ -63,6 +63,24 @@ document.getElementById('get-btn').addEventListener('click', function() {
     .catch(error => console.error('Error:', error));
 });
 
+// Delete employee by ID
+document.getElementById('delete-btn').addEventListener('click', function() {
+    let id = document.getElementById('delete-input').value;
+    deleteEmployee(id);
+});
+
+function deleteEmployee(id) {
+    fetch(`http://localhost:5000/api/employees/${id}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Employee Deleted:", data);
+        fetchEmployees();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 // Fetch and display all employees
 function fetchEmployees() {
     fetch('http://localhost:5000/api/employees')

@@ -54,6 +54,21 @@ let employeeRepo = {
                 resolve(result);
             }
         });
+    },
+
+    delete: function(id, resolve, reject) {
+        fs.readFile(filePath, function(error, data) {
+            if (error) reject(error);
+            else {
+                let employees = JSON.parse(data);
+                let filteredEmployees = employees.filter(emp => emp.id != id);
+                
+                fs.writeFile(filePath, JSON.stringify(filteredEmployees, null, 2), function(error) {
+                    if (error) reject(error);
+                    else resolve({ message: "Employee deleted successfully" });
+                });
+            }
+        });
     }
 };
 

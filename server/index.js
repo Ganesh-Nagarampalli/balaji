@@ -31,4 +31,9 @@ router.get('/employees/search', function(req, res, next) {
     }, next);
 });
 
+// Delete employee by ID
+router.delete('/employees/:id', function(req, res, next) {
+    employeeRepo.delete(req.params.id, data => res.status(200).json({ "status": 200, "data": data }), next);
+});
+
 app.listen(5000, () => console.log("Server running on http://localhost:5000"));
